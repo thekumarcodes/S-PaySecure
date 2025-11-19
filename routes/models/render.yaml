@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: s-paysecure
+    env: node
+    region: singapore
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    envVars:
+      - key: MONGO_URL
+        sync: false
