@@ -1,0 +1,280 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Dashboard | S-PaySecure2</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+    margin:0;
+    font-family: 'Orbitron', sans-serif;
+    background:#0b0f1f;
+    color:#00ffbf;
+    min-height:100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#bg {
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background: repeating-linear-gradient(180deg, rgba(0,255,120,0.05) 0px, rgba(0,255,120,0.05) 2px, transparent 2px, transparent 4px);
+    pointer-events:none;
+    animation:bgMove 10s linear infinite;
+    z-index:-1;
+}
+@keyframes bgMove { 0%{background-position:0 0;} 100%{background-position:0 400px;} }
+
+.particle {
+    position:absolute;
+    width:3px; height:3px;
+    background:#00ffbf;
+    border-radius:50%;
+    opacity:0.7;
+    animation:fall linear infinite;
+}
+@keyframes fall { from{transform:translateY(-10vh);} to{transform:translateY(110vh);} }
+
+.navbar {
+    background: rgba(0,0,0,0.7) !important;
+    backdrop-filter: blur(8px);
+    border-bottom: 2px solid #00ffbf;
+    box-shadow: 0 0 15px #00ffbf;
+}
+.navbar-brand {
+    font-weight:700;
+    font-size:1.7rem;
+    background: linear-gradient(45deg,#00ffbf,#00aaff);
+    -webkit-background-clip: text;
+    color:transparent;
+}
+#logoutBtn {
+    padding:8px 15px;
+    font-weight:700;
+    border:2px solid #00ffbf;
+    color:#00ffbf;
+    background:transparent;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+#logoutBtn:hover {
+    background:#00ffbf;
+    color:#000;
+    box-shadow:0 0 20px #00ffaa;
+    transform:scale(1.05);
+}
+
+
+.main-container {
+    flex: 1;
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    padding-top: 50px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.glass-box {
+    background: rgba(0,0,0,0.3);
+    border:1px solid #00ffbf;
+    padding:20px;
+    border-radius:15px;
+    backdrop-filter:blur(12px);
+    box-shadow:0 8px 20px rgba(0,255,190,0.3);
+    transition:0.3s;
+}
+.glass-box:hover { box-shadow:0 12px 25px #00ffbf; transform:scale(1.02); }
+
+
+h4,h5,h6 { text-shadow:0 0 12px #00ffbf; }
+h5 { font-size:22px; font-weight:700; margin-bottom:15px; color:#00ffaa; }
+
+
+.input {
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    background: rgba(0,0,0,0.2);
+    border:none;
+    border-bottom:2px solid #00ffbf;
+    color:#00ffbf;
+    outline:none;
+    font-size:16px;
+    transition:0.3s;
+}
+.input::placeholder { color:#a0ffcc; }
+.input:focus {
+    border-color:#00ffaa;
+    box-shadow:0 0 12px #00ffaa;
+    transform:scale(1.03);
+}
+
+
+.btn-hack {
+    padding:10px 15px;
+    font-weight:700;
+    color:#00ffbf;
+    border:2px solid #00ffbf;
+    background:transparent;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.btn-hack:hover {
+    background:#00ffbf;
+    color:#000;
+    box-shadow:0 0 18px #00ffaa;
+    transform:scale(1.05);
+}
+
+
+#txList {
+    list-style:none;
+    max-height:400px;
+    overflow-y:auto;
+    padding:0;
+    margin:0;
+}
+#txList li {
+    background: rgba(0,0,0,0.25);
+    border:1px solid #00ffaa;
+    border-radius:8px;
+    margin-bottom:8px;
+    padding:10px;
+    transition:0.2s;
+    cursor:pointer;
+}
+#txList li:hover { background: rgba(0,255,190,0.15); box-shadow:0 0 10px #00ffaa; transform:scale(1.02); }
+
+#otpBox {
+    background: rgba(0,0,0,0.25);
+    border:1px solid #00ffaa;
+    padding:15px;
+    border-radius:12px;
+    margin-top:10px;
+    transition:0.3s;
+}
+#otpBox:hover { box-shadow:0 0 15px #00ffaa; transform:scale(1.02); }
+
+#welcomeBox {
+    background: rgba(0,0,0,0.25);
+    padding:15px;
+    border-radius:12px;
+    border:1px solid #00ffaa;
+    margin-bottom:15px;
+    text-align:center;
+    transition:0.3s;
+}
+#welcomeBox:hover { box-shadow:0 0 20px #00ffaa; transform:scale(1.03); }
+#welcomeBox strong { color:#00ffaa; }
+
+</style>
+</head>
+
+<body>
+<div id="bg"></div>
+<script>
+for(let i=0;i<60;i++){
+    let p=document.createElement('div');
+    p.className="particle";
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=(4+Math.random()*6)+"s";
+    document.body.appendChild(p);
+}
+</script>
+
+<nav class="navbar navbar-light">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a class="navbar-brand">S-PaySecure2</a>
+    <button id="logoutBtn">Logout</button>
+  </div>
+</nav>
+
+<div class="main-container">
+  <div class="container py-4" style="max-width:1200px;">
+    <div id="welcomeBox" class="glass-box"></div>
+
+    <div class="row g-4">
+
+      <div class="col-md-6">
+        <div class="glass-box">
+          <h5>💸 Transfer Money</h5>
+          <form id="transferInit">
+            <input class="input" name="toAccountNumber" placeholder="Recipient Account Number" required>
+            <input class="input" name="amount" placeholder="Amount" required>
+            <input class="input" name="remark" placeholder="Remark (optional)">
+            <button class="btn-hack w-100 mt-2">Initiate Transfer (OTP)</button>
+          </form>
+          <div id="otpBox" style="display:none">
+            <h6>Enter OTP (Demo)</h6>
+            <form id="verifyOtp">
+              <input class="input" name="code" placeholder="OTP" required>
+              <button class="btn-hack w-100 mt-2">Verify & Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="glass-box">
+          <h5>📄 Recent Transactions</h5>
+          <ul id="txList"></ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+async function loadDash(){
+    const res = await fetch('/api/dashboard');
+    if(res.status===401) return location.href='/login';
+    const j = await res.json();
+    document.getElementById('welcomeBox').innerHTML = `<h4>Welcome, ${j.user.name}</h4><p>Account: <strong>${j.account.number}</strong> — Balance: ₹<span id="bal">${j.account.balance}</span></p>`;
+
+    const ul = document.getElementById('txList'); ul.innerHTML='';
+    j.transactions.forEach(t=>{
+        const li=document.createElement('li');
+        li.textContent = `${new Date(t.date).toLocaleString()}: ${t.type.toUpperCase()} ₹${t.amount} — ${t.remark||''}`;
+        ul.appendChild(li);
+    });
+}
+
+document.getElementById('transferInit').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fd=new FormData(e.target); 
+    const data=Object.fromEntries(fd.entries());
+    const res = await fetch('/api/transfer/initiate',{
+        method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)
+    });
+    const j = await res.json(); if(!res.ok) return alert(j.error||'Error');
+    alert('OTP generated (demo)');
+    document.getElementById('otpBox').style.display='block';
+    window.latestTransfer=data;
+    if(j.otpCode) alert('Demo OTP: '+j.otpCode);
+});
+
+document.getElementById('verifyOtp').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fd=new FormData(e.target); 
+    const otp=Object.fromEntries(fd.entries()).code;
+    const payload=Object.assign({}, window.latestTransfer||{}, {code:otp});
+    const res=await fetch('/api/transfer/verify',{method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+    const j=await res.json(); if(!res.ok) return alert(j.error||'Transfer failed');
+    alert('Transfer success'); loadDash();
+});
+
+document.getElementById('logoutBtn').addEventListener('click', async ()=>{
+    await fetch('/api/logout',{method:'POST'}); location.href='/';
+});
+
+loadDash();
+</script>
+</body>
+</html>
